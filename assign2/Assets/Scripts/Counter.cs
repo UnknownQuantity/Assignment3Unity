@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class Counter : MonoBehaviour
 {
     public AudioSource soundeffect;
@@ -9,18 +10,11 @@ public class Counter : MonoBehaviour
 
     private int count;
 
-
-
-  
-
     void Start()
     {
         soundeffect = GetComponent<AudioSource>();
         count = 0;
         SetCountText();
-
-
-
 
     }
 
@@ -33,26 +27,14 @@ public class Counter : MonoBehaviour
                 Destroy(other.gameObject);
                 count = count + 1;
                 SetCountText();
+            countText.rectTransform.DOShakeAnchorPos(3f, 20f, 5, 45, false, true);
             }
         }
     
-    /*void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-            soundeffect.Play();
-            Destroy(other.gameObject);
-            count = count + 1;
-            SetCountText();
-        }
-    }*/
-
 
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
     }
-
-
 
 }
